@@ -66,7 +66,21 @@ const LoginPage = () => {
               id="email"
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                e.target.setCustomValidity('');
+              }}
+              onInvalid={(e) => {
+                const target = e.target as HTMLInputElement;
+                if (!target.validity.valid) {
+                  // '@'가 있는지 확인
+                  if (target.value.includes('@')) {
+                    target.setCustomValidity("'@' 뒷 부분을 입력해 주세요.");
+                  } else {
+                    target.setCustomValidity("이메일 주소에 '@'를 포함해주세요.");
+                  }
+                }
+              }}
               required
               className="w-full px-4 py-2 border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-ring focus:border-transparent"
               placeholder="email@example.com"
