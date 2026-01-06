@@ -37,7 +37,7 @@ const Navigation = ({ sort, asc, onSortChange, onSortDirectionChange }: Navigati
 
       <div className="w-24 border-b border-border flex-1"></div>
 
-      {/* 정렬 방향 토글 - 클릭하면 바뀔 상태를 표시 */}
+      {/* 정렬 방향 토글 - 현재 상태를 표시 */}
       <div className="flex items-center gap-2">
         <button
           onClick={() => onSortDirectionChange(!asc)}
@@ -45,9 +45,9 @@ const Navigation = ({ sort, asc, onSortChange, onSortDirectionChange }: Navigati
           title={asc ? '내림차순으로 변경' : '오름차순으로 변경'}
         >
           <span className="material-symbols-outlined text-lg">
-            {asc ? 'arrow_downward' : 'arrow_upward'}
+            {asc ? 'arrow_upward' : 'arrow_downward'}
           </span>
-          <span className="hidden sm:inline">{asc ? '내림차순' : '오름차순'}</span>
+          <span className="hidden sm:inline">{asc ? '오름차순' : '내림차순'}</span>
         </button>
       </div>
     </div>
