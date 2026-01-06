@@ -31,7 +31,10 @@ const PostEditPage = () => {
 
         // 작성자 검증: 현재 로그인한 사용자가 게시글 작성자인지 확인
         if (!user || user.userId !== post.author.userId) {
-          navigate(`/posts/${postId}`, { replace: true });
+          // 홈페이지로 리다이렉트 (히스토리 교체)
+          // replace: true로 현재 edit 페이지를 히스토리에서 교체하여
+          // 뒤로가기 시 edit 페이지로 돌아오지 않도록 함
+          navigate('/', { replace: true });
           return;
         }
 
