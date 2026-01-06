@@ -30,11 +30,8 @@ function HomePage() {
         size: 12,
       };
 
-      // 정렬 파라미터 (기본값이 아닐 때만 전달)
-      if (queryParams.sort !== DEFAULT_SORT) {
-        params.sort = queryParams.sort;
-      }
-      // asc 파라미터는 항상 명시적으로 전달 (백엔드 기본값이 true일 수 있음)
+      // 정렬 파라미터 - 항상 명시적으로 전달
+      params.sort = queryParams.sort;
       params.asc = queryParams.asc;
 
       // 태그 필터
