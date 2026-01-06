@@ -34,9 +34,8 @@ function HomePage() {
       if (queryParams.sort !== DEFAULT_SORT) {
         params.sort = queryParams.sort;
       }
-      if (queryParams.asc) {
-        params.asc = true;
-      }
+      // asc 파라미터는 항상 명시적으로 전달 (백엔드 기본값이 true일 수 있음)
+      params.asc = queryParams.asc;
 
       // 태그 필터
       if (queryParams.tags.length > 0) {
