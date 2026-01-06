@@ -326,11 +326,16 @@ const PostDetailPage = () => {
       const updatedComment = response.data;
       if (updatedComment && updatedComment.content) {
         setComments((prev) =>
-          prev.map((comment) =>
-            comment.commentId === commentId
-              ? { ...comment, content: updatedComment.content, updatedAt: updatedComment.updatedAt }
-              : comment
-          )
+          prev.map((comment) => {
+            if (comment.commentId === commentId) {
+              // updatedAt이 createdAt과 다르게 설정되도록 보장
+              const updatedAt = updatedComment.updatedAt && updatedComment.updatedAt !== comment.createdAt 
+                ? updatedComment.updatedAt 
+                : new Date().toISOString();
+              return { ...comment, content: updatedComment.content, updatedAt };
+            }
+            return comment;
+          })
         );
       } else {
         console.error('댓글 수정 응답 구조 오류:', response);
@@ -404,18 +409,24 @@ const PostDetailPage = () => {
       const updatedReply = response.data;
       if (updatedReply && updatedReply.content) {
         setComments((prev) =>
-          prev.map((comment) =>
-            comment.commentId === commentId
-              ? {
-                  ...comment,
-                  replies: (comment.replies || []).map((reply) =>
-                    reply.replyId === replyId
-                      ? { ...reply, content: updatedReply.content, updatedAt: updatedReply.updatedAt }
-                      : reply
-                  ),
-                }
-              : comment
-          )
+          prev.map((comment) => {
+            if (comment.commentId === commentId) {
+              return {
+                ...comment,
+                replies: (comment.replies || []).map((reply) => {
+                  if (reply.replyId === replyId) {
+                    // updatedAt이 createdAt과 다르게 설정되도록 보장
+                    const updatedAt = updatedReply.updatedAt && updatedReply.updatedAt !== reply.createdAt 
+                      ? updatedReply.updatedAt 
+                      : new Date().toISOString();
+                    return { ...reply, content: updatedReply.content, updatedAt };
+                  }
+                  return reply;
+                }),
+              };
+            }
+            return comment;
+          })
         );
       } else {
         console.error('답글 수정 응답 구조 오류:', response);

@@ -174,7 +174,7 @@ const PostCreatePage = () => {
               onClick={() => navigate(-1)}
               className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
             >
-              <span className="material-symbols-outlined">
+              <span className="material-symbols-outlined text-sm">
                 arrow_back
               </span>
             </button>
@@ -367,7 +367,7 @@ const PostCreatePage = () => {
                     ref={contentTextareaRef}
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
-                    className="w-full bg-card border border-input rounded-lg p-4 pl-16 focus:ring-2 focus:ring-ring focus:border-primary resize-none text-base leading-relaxed text-foreground placeholder:text-muted-foreground min-h-[500px] font-mono transition-all"
+                    className="w-full bg-card border border-input rounded-lg p-4 pl-16 focus:ring-2 focus:ring-ring focus:border-primary resize-none text-base leading-relaxed text-foreground placeholder:text-muted-foreground min-h-[600px] font-mono transition-all"
                     placeholder={`# 마크다운으로 작성하세요
 
 ## 제목 사용법
