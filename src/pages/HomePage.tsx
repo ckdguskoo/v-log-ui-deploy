@@ -128,9 +128,9 @@ function HomePage() {
   const handleSortDirectionChange = useCallback((newAsc: boolean) => {
     const newParams = new URLSearchParams(searchParams);
     if (newAsc) {
-      newParams.set('asc', 'true');
+      newParams.set('asc', 'true');  // 오름차순일 때만 파라미터 설정
     } else {
-      newParams.delete('asc');
+      newParams.delete('asc');       // 내림차순(기본값)일 때는 파라미터 삭제
     }
     setSearchParams(newParams);
   }, [searchParams, setSearchParams]);

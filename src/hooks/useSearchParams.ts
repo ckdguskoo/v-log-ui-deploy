@@ -19,7 +19,7 @@ export const useSearchParams = (): [SearchParams, ReturnType<typeof useReactRout
 
   const params = useMemo<SearchParams>(() => {
     const sort = (searchParams.get('sort') as SortField) || DEFAULT_SORT;
-    const asc = searchParams.get('asc') !== 'false';  // 기본값 true (최신순)
+    const asc = searchParams.get('asc') === 'true';  // 기본값 false (내림차순, 최신순)
     const keyword = searchParams.get('keyword')?.trim() || undefined;
     const search = (searchParams.get('search') as 'TITLE' | 'NICKNAME') || 'TITLE';
     const tags = searchParams.getAll('tag').filter((t) => t.trim());

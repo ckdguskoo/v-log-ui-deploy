@@ -189,7 +189,7 @@ const PostEditPage = () => {
         content: content.trim(),
         tags: tags.length > 0 ? tags : undefined,
       });
-      navigate(`/posts/${response.postId}`);
+      navigate(`/posts/${response.postId}`, { replace: true });
     } catch (err: any) {
       setError(err.response?.data?.message || '게시글 수정에 실패했습니다.');
     } finally {
