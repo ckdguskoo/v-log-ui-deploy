@@ -5,10 +5,12 @@ import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
 import { postsApi } from '../api/posts';
 import ProtectedRoute from '../components/ProtectedRoute';
+import { useAuth } from '../context/AuthContext';
 
 const PostEditPage = () => {
   const { postId } = useParams<{ postId: string }>();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [tags, setTags] = useState<string[]>([]);
@@ -26,6 +28,13 @@ const PostEditPage = () => {
       try {
         setLoading(true);
         const post = await postsApi.getPost(Number(postId));
+
+        // 작성자 검증: 현재 로그인한 사용자가 게시글 작성자인지 확인
+        if (!user || user.userId !== post.author.userId) {
+          navigate(`/posts/${postId}`, { replace: true });
+          return;
+        }
+
         setTitle(post.title);
         setContent(post.content);
         setTags(post.tags || []);
@@ -37,7 +46,7 @@ const PostEditPage = () => {
     };
 
     fetchPost();
-  }, [postId]);
+  }, [postId, user, navigate]);
 
   // 제목 textarea 자동 높이 조절
   useEffect(() => {
