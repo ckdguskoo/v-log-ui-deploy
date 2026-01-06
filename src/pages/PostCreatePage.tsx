@@ -155,7 +155,9 @@ const PostCreatePage = () => {
         content: content.trim(),
         tags: tags.length > 0 ? tags : undefined,
       });
-      navigate(`/posts/${response.postId}`);
+      // replace: true로 글 작성 페이지를 히스토리에서 교체
+      // 상세 페이지에서 "뒤로가기" 시 글 작성 페이지로 돌아오지 않도록 함
+      navigate(`/posts/${response.postId}`, { replace: true });
     } catch (err: any) {
       setError(err.response?.data?.message || '게시글 작성에 실패했습니다.');
     } finally {
